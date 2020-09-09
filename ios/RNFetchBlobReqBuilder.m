@@ -135,15 +135,7 @@
                         return;
                     }
                     size = [[[NSFileManager defaultManager] attributesOfItemAtPath:orgPath error:nil] fileSize];
-                    if(transferEncoding != nil && [[transferEncoding lowercaseString] isEqualToString:@"chunked"])
-                    {
-                        [request setHTTPBodyStream: [NSInputStream inputStreamWithFileAtPath:orgPath ]];
-                    }
-                    else
-                    {
-                        __block NSData * bodyBytes = [NSData dataWithContentsOfFile:orgPath ];
-                        [request setHTTPBody:bodyBytes];
-                    }
+                    [request setHTTPBodyStream: [NSInputStream inputStreamWithFileAtPath:orgPath ]];
                 }
                 // otherwise convert it as BASE64 data string
                 else {
